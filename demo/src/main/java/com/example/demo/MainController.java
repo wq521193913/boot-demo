@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.broker.domain.SysUser;
 import com.example.entity.User;
 import com.example.service.UserService;
 import net.sf.json.JSONObject;
@@ -16,6 +17,8 @@ public class MainController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private RpcSysUserService rpcSysUserService;
 
     @RequestMapping("/")
     public ModelAndView helloWorld() {
@@ -32,6 +35,21 @@ public class MainController {
             User user = userService.queryUserById(id);
             result.put("success",true);
             result.put("data",user);
+            result.put("msg","查询成功");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/getSysUser", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject getSysUser(@RequestParam("id")Integer id){
+        JSONObject result = new JSONObject();
+        try {
+            SysUser sysUser = rpcSysUserService.querySysUserById(0);
+            result.put("success",true);
+            result.put("data",sysUser);
             result.put("msg","查询成功");
         }catch (Exception e){
             e.printStackTrace();

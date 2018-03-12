@@ -23,7 +23,13 @@ spring:
         testOnReturn: false
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
+    application:
+        name: service-hi
 
 #mybatis:
 #  mapper-locations: classpath:mapping/*.xml
 #  type-aliases-package: com.example.model
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
